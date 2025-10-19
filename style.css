@@ -1,6 +1,9 @@
 html {
 	--color-accent: oklch(65% 50% 0);  /* warm golden-orange accent */
 	accent-color: var(--color-accent);  /* for form controls, etc. */
+	color-scheme: light dark;
+	background-color: Canvas;       /* system background (light → white, dark → dark gray) */
+	color: CanvasText;  
   }
 
 body {
@@ -14,10 +17,14 @@ body {
 }
 
 nav {
+	--border-color: oklch(50% 10% 200 / 40%);
+	
 	display: flex;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: oklch(80% 3% 200);
+	/* border-bottom-color: oklch(80% 3% 200); */
+	border-bottom-color: var(--border-color);
+
 }
 
 nav a {
@@ -41,7 +48,9 @@ nav a:hover {
   border-bottom-style: solid;
   border-bottom-color: var(--color-accent);
   margin-bottom: 0;
-  background-color: oklch(from var(--color-accent) 95% 5% h)
+  /* background-color: oklch(from var(--color-accent) 95% 5% h) */
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+
 }
 
 /* label,
@@ -104,4 +113,15 @@ h1, h2, h3, h4, h5, h6 {
   h1 {
 	font-size: 400%;
   }
+
+  /* Step 4.3 – Theme switcher positioning */
+label.color-scheme {
+	position: absolute;   /* take it out of normal flow */
+	top: 1rem;            /* distance from the top edge */
+	right: 1rem;          /* distance from the right edge */
+	font-size: 80%;       /* make it less prominent */
+	font-family: inherit; /* match the site’s font */
+}
+
+
 
