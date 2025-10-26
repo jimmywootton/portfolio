@@ -104,3 +104,56 @@ select.addEventListener('input', (event) => {
   localStorage.colorScheme = value;
 });
 
+export async function fetchJSON(url) {
+	try {
+	const response = await fetch(url);
+	if (!response.ok) {
+		throw new Error(`Failed to fetch projects: ${response.statusText}`);
+	}
+	const data = await response.json();
+	return data;
+	} catch (error) {
+		console.error('Error fetching or parsing JSON data:', error);
+	}
+}
+
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+    // Check that containerElement is valid
+    if (!containerElement) {
+        console.error('Container element not found or invalid.');
+        return;
+    }
+
+    // Clear any existing content to prevent duplication
+    containerElement.innerHTML = '';
+
+    // Validate that projects is an array
+    if (!Array.isArray(projects)) {
+        console.error('Projects data is not an array.');
+        return;
+    }
+
+    // Loop through each project and create an article for it
+    projects.forEach(project => {
+        const article = document.createElement('article');
+
+        // Safely construct dynamic heading
+        const validHeading = /^h[1-6]$/.test(headingLevel) ? headingLevel : 'h2';
+        const titleTag = `<${validHeading}>${project.title || 'Untitled Project'}</${validHeading}>`;
+
+        // Populate article with project content
+        article.innerHTML = `
+            ${titleTag}
+            ${project.image ? `<img src="${project.image}" alt="${project.title || 'Project image'}">` : ''}
+            <p>${project.description || 'No description available.'}</p>
+        `;
+
+        // Append to the container
+        containerElement.appendChild(article);
+    });
+}
+
+export async function fetchGitHubData(username) {
+    // Fetch data from GitHub's public API for the given username
+    return fetchJSON(`https://api.github.com/users/${username}`);
+}

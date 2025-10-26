@@ -123,5 +123,30 @@ label.color-scheme {
 	font-family: inherit; /* match the site’s font */
 }
 
+#profile-stats {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+#profile-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem 1rem;
+    text-align: center;
+}
+
+/* Each <dt> goes in the first row, each <dd> in the second */
+#profile-stats dt {
+    grid-row: 1;
+    font-weight: bold;
+}
+
+#profile-stats dd {
+    grid-row: 2;
+    margin: 0;
+}
 
 
