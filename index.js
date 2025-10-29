@@ -12,7 +12,7 @@ const projectsContainer = document.querySelector('.projects');
 renderProjects(latestProjects, projectsContainer, 'h2');
 
 // Step 3: Parsing the Response in index.js
-const githubData = await fetchGitHubData('giorgianicolaou');
+const githubData = await fetchGitHubData('jimmywootton');
 
 // Step 4: Targeting the HTML Element in index.js
 const profileStats = document.querySelector('#profile-stats');
