@@ -149,4 +149,84 @@ label.color-scheme {
     margin: 0;
 }
 
+#projects-pie-plot {
+    max-width: 20em;
+    margin-block: 2em;
+    overflow: visible; /* helpful for labels later */
+    display: block;    /* removes inline-gap quirks */
+}
+/* Side-by-side layout */
+.container {
+    display: flex;
+    gap: 1.25rem;          /* spacing between chart and legend */
+    align-items: center;   /* vertical alignment; try flex-start if you prefer top-aligned */
+}
 
+/* Keep the SVG nicely sized; it will scale thanks to the viewBox */
+.container svg {
+    max-width: 20rem;      /* tweak as you like */
+    width: 100%;
+    height: auto;
+    flex: 0 0 auto;        /* don't stretch the SVG */
+}
+
+/* Legend takes the remaining width */
+.legend {
+    flex: 1;               /* ⬅️ recommended: fill remaining horizontal space */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    background: #fafafa;
+}
+
+/* Legend item uses flex for swatch+text alignment */
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;           /* smaller than .legend gap (proximity) */
+    min-width: 9em;
+    font-size: 0.95rem;
+}
+
+/* Swatch square */
+.swatch {
+    display: inline-block; /* enables width/height */
+    width: 1rem;
+    height: 1rem;
+    aspect-ratio: 1 / 1;
+    background: var(--color);
+    border-radius: 4px;    /* use 50% for circle */
+    flex-shrink: 0;
+}
+
+
+.searchBar {
+    display: block;
+    width: 100%;
+    max-width: 20rem;
+    margin: 1rem 0 0;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    background-color: #fff;
+}
+.searchBar:focus {
+    outline: 2px solid #4f46e5;  /* violet focus ring */
+    border-color: #4f46e5;
+}
+
+&:has(path:hover) {
+	path:not(:hover) {
+	  opacity: 0.5;
+	}
+  }
+
+path {
+	transition: 300ms;
+  }

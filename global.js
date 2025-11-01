@@ -1,5 +1,3 @@
-console.log('IT’S ALIVE!');
-
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/"                    // local dev server
@@ -141,11 +139,18 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
         const validHeading = /^h[1-6]$/.test(headingLevel) ? headingLevel : 'h2';
         const titleTag = `<${validHeading}>${project.title || 'Untitled Project'}</${validHeading}>`;
 
+        const detailsDiv = `
+        <div class="project-details">
+            <p>${project.description || 'No description available.'}</p>
+            ${project.year ? `<p class="project-year">Year: ${project.year}</p>` : ''}
+        </div>
+      `;
+
         // Populate article with project content
         article.innerHTML = `
             ${titleTag}
             ${project.image ? `<img src="${project.image}" alt="${project.title || 'Project image'}">` : ''}
-            <p>${project.description || 'No description available.'}</p>
+            ${detailsDiv}
         `;
 
         // Append to the container
